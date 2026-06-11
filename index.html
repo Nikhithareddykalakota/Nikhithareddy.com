@@ -3,135 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reimagining the To-Go Box. Nikhitha Reddy Kalakota</title>
+<title>Nikhitha Reddy Kalakota, UX Designer & Researcher</title>
+<meta name="description" content="UX Designer & Researcher blending creativity, research, and technology to design experiences that are intuitive, accessible, and meaningful.">
 <link rel="stylesheet" href="style.css">
 <style>
-.cs-hero{background:#F5F2ED;padding:88px 6vw 56px}
-.cs-inner{max-width:1100px;margin:0 auto}
-.persona-card{display:grid;grid-template-columns:52px 1fr;gap:18px;align-items:start;background:var(--white);border:1px solid var(--sand);border-radius:14px;padding:24px;margin-top:20px}
-.p-avatar{width:52px;height:52px;border-radius:50%;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--crimson);flex-shrink:0}
-.p-name{font-size:15px;font-weight:600;color:var(--crimson);margin-bottom:3px}
-.p-role{font-size:11px;color:var(--rose);font-weight:500;letter-spacing:0.04em;margin-bottom:10px}
-.p-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--ink);line-height:1.6;margin-bottom:10px}
-.p-tags{display:flex;gap:7px;flex-wrap:wrap}
-.p-tag{background:var(--rose-pale);border-radius:4px;padding:3px 9px;font-size:11px;color:var(--crimson)}
-.img-slot{width:100%;background:var(--rose-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;border:2px dashed var(--sand);margin-top:20px}
+.hero {
+  min-height: calc(100vh - 68px);
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 0;
+  padding: 0 6vw; max-width: 1200px; margin: 0 auto;
+}
+.hero-left { padding-right: 4vw; }
+.hero-greeting {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7.5vw, 96px);
+  font-weight: 900; color: var(--crimson);
+  line-height: 1.0; letter-spacing: -3px;
+  margin-bottom: 18px;
+}
+.hero-role {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 36px); font-weight: 400;
+  font-style: italic; color: var(--rose);
+  margin-bottom: 28px; line-height: 1.3;
+}
+.hero-tagline {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: var(--muted); line-height: 1.75;
+  max-width: 480px; margin-bottom: 40px; font-weight: 400;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-right {
+  height: calc(100vh - 68px);
+  overflow: hidden; position: relative;
+}
+.hero-photo {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  background: var(--rose-pale);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+}
+.hero-photo-placeholder .initials {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px; font-weight: 700; color: var(--crimson); opacity: 0.4;
+}
+.hero-photo-placeholder .hint {
+  font-size: 13px; color: var(--rose); letter-spacing: 0.06em;
+  text-align: center; max-width: 200px; line-height: 1.5;
+}
+.scroll-hint {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--rose); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+.scroll-arrow { font-size: 20px; }
+
+.stats-band { background: var(--white); border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); padding: 36px 6vw; }
+.stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.stat-item { text-align: center; }
+.stat-n { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--crimson); line-height: 1; margin-bottom: 7px; }
+.stat-l { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.work-section { padding: 80px 6vw; max-width: 1200px; margin: 0 auto; }
+.work-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; }
+.work-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+
+.about-strip { background: var(--white); padding: 80px 6vw; }
+.about-strip-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-strip-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 16px; }
+.about-strip-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--rose-pale); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; color: var(--crimson); opacity: 0.3; }
+
+.cta-banner { background: var(--crimson); padding: 72px 6vw; text-align: center; }
+.cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(32px,4vw,48px); font-weight: 700; color: var(--white); letter-spacing: -1px; margin-bottom: 14px; }
+.cta-banner p { font-size: 17px; color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+.btn-white { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--crimson); border: none; border-radius: 6px; padding: 14px 28px; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.2s; }
+.btn-white:hover { opacity: 0.9; }
+.btn-white-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 13px 28px; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; margin-left: 12px; }
+.btn-white-outline:hover { border-color: var(--white); }
+
+@media(max-width:900px){
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 60px; padding-bottom: 0; }
+  .hero-left { padding-right: 0; padding-bottom: 48px; }
+  .hero-right { height: 60vw; max-height: 420px; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .about-strip-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media(max-width:580px){ .work-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="nav-logo"><div class="logo-fallback">👩🏻</div><span>Nikhitha</span></a>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-fallback">👩🏻</div>
+    <span>Nikhitha</span>
+  </a>
   <div class="nav-links" id="nav-links">
-    <a href="index.html">Home</a><a href="about.html">About</a>
-    <a href="work.html" class="active">Work</a><a href="resume.html">Resume</a><a href="contact.html">Contact Me</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="resume.html">Resume</a>
+    <a href="contact.html">Contact Me</a>
   </div>
-  <button class="nav-mobile-btn" onclick="toggleNav()">☰</button>
+  <button class="nav-mobile-btn" onclick="toggleNav()" aria-label="Menu">☰</button>
 </nav>
 
-<div class="cs-hero">
-  <div class="cs-inner">
-    <a class="cs-back" href="work.html">← Back to Work</a>
-    <div class="cs-tag-row">
-      <span class="cs-pill">Design Research + Prototyping</span>
-      <span class="cs-yr">HSE521 · Spring 2022 · Team of 4</span>
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-greeting">Hi, I'm<br>Nikhitha</h1>
+    <p class="hero-role">A UX Designer &amp; Researcher</p>
+    <p class="hero-tagline">UX Researcher &amp; Testing Lead at Stellantis, leading usability studies, expert evaluations, and large-scale surveys to shape automotive experiences that are intuitive, safe, and human-centered.</p>
+    <div class="hero-btns">
+      <a href="work.html" class="btn-primary">View My Work →</a>
+      <a href="contact.html" class="btn-outline">Get in Touch</a>
     </div>
-    <h1 class="cs-title">Reimagining<br>the To-Go Box</h1>
-    <p class="cs-tagline">Turning the most overlooked object in takeout culture into a user-centered, eco-friendly experience, through research, personas, journey mapping, and physical prototyping.</p>
-    <div class="cs-meta-grid">
-      <div class="cs-meta-card"><div class="cs-meta-label">Role</div><div class="cs-meta-val">User Research · Product Design · Prototyping</div></div>
-      <div class="cs-meta-card"><div class="cs-meta-label">Timeline</div><div class="cs-meta-val">4 Months. Spring 2022</div></div>
-      <div class="cs-meta-card"><div class="cs-meta-label">Team</div><div class="cs-meta-val">Riddhi G · Sunali R · Tejaswini B · Nikhitha R</div></div>
-      <div class="cs-meta-card"><div class="cs-meta-label">Grade</div><div class="cs-meta-val">A+ (97.25%), HSE521</div></div>
+  </div>
+  <div class="hero-right">
+    <img src="images/nikhitha.png" alt="Nikhitha Reddy Kalakota" class="hero-photo">
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="t-item">Moderated Usability Testing</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Expert Evaluation</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Automotive UX</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Heuristic Evaluation</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Survey Design</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">UserTesting.com</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Journey Mapping</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Human Factors</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Figma</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Think-Aloud Protocol</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Moderated Usability Testing</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Expert Evaluation</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Automotive UX</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Heuristic Evaluation</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Survey Design</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">UserTesting.com</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Journey Mapping</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Human Factors</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Figma</span><span class="t-dot">&nbsp;·&nbsp;</span>
+    <span class="t-item">Think-Aloud Protocol</span>
+  </div>
+</div>
+
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-n">15+</div><div class="stat-l">Projects</div></div>
+    <div class="stat-item"><div class="stat-n">600+</div><div class="stat-l">Participants</div></div>
+    <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">Years Experience</div></div>
+    <div class="stat-item"><div class="stat-n">Mixed</div><div class="stat-l">Methods</div></div>
+  </div>
+</div>
+
+<section class="work-section">
+  <div class="work-header">
+    <div>
+      <p class="section-eyebrow">Selected Work</p>
+      <h2 class="section-title" style="margin-bottom:0">Case Studies</h2>
+    </div>
+    <a href="work.html" class="btn-outline" style="padding:10px 20px;font-size:12px">View All →</a>
+  </div>
+  <div class="work-grid">
+
+    <!-- 1. Stellantis Profiles -->
+    <a href="cs-stellantis.html" class="project-card">
+      <div class="card-cover" style="background:#08090d;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#d9ff6f;opacity:0.9">Stellantis</span>
+      </div>
+      <div class="card-body">
+        <p class="card-eyebrow">UX Research · 2024</p>
+        <h3 class="card-title">Making the Invisible Understandable</h3>
+        <p class="card-desc">Expert evaluation on a driver profile system at Stellantis — reframing usability issues as mental model opportunities.</p>
+        <div class="card-chips"><span class="chip">Expert Evaluation</span><span class="chip">Automotive</span><span class="chip">Industry</span></div>
+        <span class="card-link">Read case study →</span>
+      </div>
+    </a>
+
+    <!-- 2. ARCA -->
+    <a href="cs-automotive.html" class="project-card">
+      <div class="card-cover" style="background:#0d1426">🚗</div>
+      <div class="card-body">
+        <p class="card-eyebrow">Automotive UI Design · 2026</p>
+        <h3 class="card-title">ARCA — Driver Profile System</h3>
+        <p class="card-desc">A dark-themed in-vehicle driver profile system for a next-generation automotive HMI. Four interactive states, designed for speed and safety.</p>
+        <div class="card-chips"><span class="chip">HMI Design</span><span class="chip">Automotive UX</span></div>
+        <span class="card-link">Read case study →</span>
+      </div>
+    </a>
+
+    <!-- 3. Health Track -->
+    <a href="cs-health-track.html" class="project-card">
+      <div class="card-cover" style="background:#E8F2EE">🏥</div>
+      <div class="card-body">
+        <p class="card-eyebrow">UX Strategy · 2023</p>
+        <h3 class="card-title">Health Track</h3>
+        <p class="card-desc">A centralized health companion for a world of fragmented medical records.</p>
+        <div class="card-chips"><span class="chip">5 Planes</span><span class="chip">Hi-Fi Design</span></div>
+        <span class="card-link">Read case study →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="about-strip">
+  <div class="about-strip-inner">
+    <img src="images/nikhitha-nature.jpeg" class="about-strip-img" alt="Nikhitha Reddy Kalakota">
+    <div>
+      <p class="section-eyebrow">About Me</p>
+      <h2 class="section-title">Designing the space between intention and use.</h2>
+      <p class="section-body" style="margin-bottom:20px">I'm Nikhitha, a UX Researcher and Testing Lead at Stellantis, one of the world's largest automotive companies. I lead full-cycle usability studies, expert evaluations, and large-scale surveys that shape how millions of people interact with vehicles every day.</p>
+      <p class="section-body" style="margin-bottom:32px">With a foundation in Human Systems Engineering and UX from Arizona State University, I bring both academic rigor and real-world industry experience to every research engagement, from 30-participant moderated studies to 600+ response surveys on UserTesting and SurveyMonkey.</p>
+      <a href="about.html" class="btn-primary">More About Me →</a>
     </div>
   </div>
 </div>
 
-<div class="cs-body">
-
-  <div class="cs-section">
-    <p class="section-eyebrow">The Problem</p>
-    <h2 class="section-title">Six ways the to-go box fails its users</h2>
-    <p class="section-body">No handle to carry · liquid items require separate containers · cutlery must be carried separately · non-microwaveable materials · non-eco-friendly construction · chronic leakage and spillage. Every single day, millions of people wrestle with all six.</p>
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num">15</div><div class="stat-lbl">participants surveyed on takeout habits</div></div>
-      <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">in-depth user interviews conducted</div></div>
-      <div class="stat-card"><div class="stat-num">8</div><div class="stat-lbl">distinct user personas developed</div></div>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="section-eyebrow">Key Persona</p>
-    <h2 class="section-title">Designing for Manjari Yengde</h2>
-    <p class="section-body">After thorough surveys and interviews, one persona emerged as our design anchor, capturing the core frustrations shared by the majority of our users.</p>
-    <div class="persona-card">
-      <div class="p-avatar">MY</div>
-      <div>
-        <div class="p-name">Manjari Yengde</div>
-        <div class="p-role">26 · Project Coordinator · Construction Company</div>
-        <p class="p-quote">"I just want a box that's easy to carry and won't spill my food everywhere. Is that too much to ask?"</p>
-        <div class="p-tags"><span class="p-tag">Eco-conscious</span><span class="p-tag">Always on the go</span><span class="p-tag">Microwave user</span><span class="p-tag">Practical buyer</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="section-eyebrow">User Journey Map</p>
-    <h2 class="section-title">5 touchpoints, one clear story</h2>
-    <p class="section-body">We traced Manjari's complete journey: Search online → Visit store → See product details → Select & pay → Share experience. Each touchpoint revealed emotional lows that drove our redesign, especially the moment of carrying and opening the box.</p>
-    <div class="img-slot" style="height:220px">📸 Add your journey map image here</div>
-  </div>
-
-  <div class="cs-section">
-    <p class="section-eyebrow">The Process</p>
-    <h2 class="section-title">From observation to prototype</h2>
-    <div class="timeline">
-      <div class="t-step">
-        <div class="t-left"><span class="t-badge">Discover</span><div class="t-line"></div></div>
-        <div class="t-right"><div class="t-step-title">Surveys, interviews, and observational research</div><div class="t-step-body">Surveyed 15 participants, interviewed 4 users. Top priorities: food safety, leak-proof design, eco-friendliness. Cardboard and bamboo strongly preferred over plastic.</div></div>
-      </div>
-      <div class="t-step">
-        <div class="t-left"><span class="t-badge">Define</span><div class="t-line"></div></div>
-        <div class="t-right"><div class="t-step-title">8 user personas. Manjari became the design anchor</div><div class="t-step-body">Each team member built 2 personas. Manjari needed a box that carries itself, holds liquids, and doesn't embarrass her at lunch. Her frustrations shaped every decision.</div></div>
-      </div>
-      <div class="t-step">
-        <div class="t-left"><span class="t-badge">Design</span><div class="t-line"></div></div>
-        <div class="t-right"><div class="t-step-title">3D digital model in SketchUp</div><div class="t-step-body">Designed a 3-compartment eco-box. Three sections keep food separate and prevent taste mixing. A bagasse liquid compartment holds soups without leaking.</div></div>
-      </div>
-      <div class="t-step">
-        <div class="t-left"><span class="t-badge">Build</span></div>
-        <div class="t-right"><div class="t-step-title">Physical prototype, cardboard, bagasse, silicone</div><div class="t-step-body">Recyclable cardboard shell · bagasse leak-proof liquid compartment (microwave-safe) · silicone carry handle · integrated cutlery slot in the lid.</div></div>
-      </div>
-    </div>
-    <div class="img-slot" style="height:260px">📸 Add your prototype photos here</div>
-  </div>
-
-  <div class="cs-section">
-    <p class="section-eyebrow">Outcome</p>
-    <div class="outcome-box">
-      <p class="outcome-quote">"A sustainable, user-tested redesign that addressed all 6 pain points, from chronic leakage to eco-impact, through rigorous research and iterative physical prototyping."</p>
-      <p class="outcome-attr">HSE521. Methods & Tools of Human System Engineering · Dr. Jaimie McNabb, ASU</p>
-      <span class="grade-pill">A+ &nbsp;97.25%</span>
-    </div>
-  </div>
-
-
-
-</div>
-
-<div class="case-nav">
-  <div></div>
-  <a href="cs-health-track.html">
-    <div class="cn-label">Next Case Study</div>
-    <div class="cn-title">Health Track. Centralized Health Companion →</div>
-  </a>
+<div class="cta-banner">
+  <h2>Let's build better experiences together.</h2>
+  <p>Open to senior UX research roles, leadership opportunities, and collaborations in automotive, product, or enterprise UX.</p>
+  <a href="contact.html" class="btn-white">Get in Touch</a>
+  <a href="work.html" class="btn-white-outline">View My Work</a>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <div><div class="footer-name">Nikhitha Reddy Kalakota</div><div class="footer-sub">PRODUCT DESIGNER · UX RESEARCHER</div></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div>
+      <div class="footer-name">Nikhitha Reddy Kalakota</div>
+      <div class="footer-sub">PRODUCT DESIGNER · UX RESEARCHER · NIKHITHAREDDY.COM</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="work.html">Work</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.linkedin.com/in/nikhitha-reddy-0a5a8b15b/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </footer>
-<script>function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}</script>
+
+<script>
+function toggleNav(){
+  var nl = document.getElementById('nav-links');
+  nl.classList.toggle('open');
+}
+</script>
 </body>
 </html>
