@@ -1,985 +1,407 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Making the Invisible Understandable — Nikhitha Reddy Kalakota</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<!-- Portfolio shared styles -->
-<link rel="stylesheet" href="style.css"/>
-<style>
-
-    :root {
-      --bg: #08090d;
-      --surface: #11131a;
-      --surface-2: #181b24;
-      --text: #f7f3ea;
-      --muted: #b8b3a7;
-      --soft: rgba(255,255,255,0.07);
-      --line: rgba(255,255,255,0.13);
-      --accent: #d9ff6f;
-      --accent-2: #a6e9ff;
-      --warm: #ffe4b8;
-      --radius: 28px;
-      --max: 1180px;
-      --shadow: 0 28px 90px rgba(0,0,0,.38);
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(166,233,255,.16), transparent 28%),
-        radial-gradient(circle at 88% 4%, rgba(217,255,111,.16), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .case-study {
-      overflow: hidden;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
-      background: rgba(8,9,13,.75);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      font-weight: 800;
-      letter-spacing: -.04em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .container {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .hero {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 86px 24px 104px;
-      display: grid;
-      grid-template-columns: 1.04fr .96fr;
-      gap: 58px;
-      align-items: center;
-      min-height: 92vh;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--accent);
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: .12em;
-      font-weight: 800;
-      margin-bottom: 22px;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      background: var(--accent);
-      border-radius: 999px;
-      box-shadow: 0 0 24px rgba(217,255,111,.7);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(52px, 8vw, 104px);
-      line-height: .92;
-      letter-spacing: -.075em;
-      max-width: 860px;
-    }
-
-    h2 {
-      margin: 0 0 24px;
-      font-size: clamp(38px, 5vw, 72px);
-      line-height: 1;
-      letter-spacing: -.06em;
-      max-width: 920px;
-    }
-
-    h3 {
-      letter-spacing: -.045em;
-      line-height: 1.1;
-    }
-
-    .hero-copy {
-      margin: 28px 0 34px;
-      color: var(--muted);
-      font-size: 20px;
-      max-width: 660px;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      font-weight: 800;
-      transition: .2s ease;
-    }
-
-    .btn.primary {
-      background: var(--accent);
-      color: #121212;
-      border-color: var(--accent);
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .hero-visual {
-      min-height: 560px;
-      border: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035));
-      border-radius: 40px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
-      background-size: 36px 36px;
-      mask-image: radial-gradient(circle at center, black, transparent 78%);
-    }
-
-    .system-map {
-      position: absolute;
-      inset: 42px;
-      display: grid;
-      place-items: center;
-    }
-
-    .circle {
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 50%;
-    }
-
-    .circle.one { width: 88%; height: 88%; }
-    .circle.two { width: 62%; height: 62%; }
-    .circle.three { width: 36%; height: 36%; }
-
-    .node {
-      position: absolute;
-      width: 135px;
-      height: 135px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 16px;
-      font-weight: 900;
-      letter-spacing: -.04em;
-      border: 1px solid var(--line);
-      background: var(--surface-2);
-      box-shadow: 0 20px 55px rgba(0,0,0,.34);
-    }
-
-    .node.profile { left: 22px; top: 56px; }
-    .node.connection { right: 20px; top: 178px; background: rgba(217,255,111,.12); }
-    .node.sync { left: 110px; bottom: 50px; background: rgba(166,233,255,.13); }
-    .node.center {
-      width: 178px;
-      height: 178px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--accent);
-      color: #111;
-    }
-
-    .section {
-      padding: 96px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-label {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-size: 13px;
-      font-weight: 900;
-      margin-bottom: 16px;
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: 21px;
-      max-width: 790px;
-      margin: 0 0 36px;
-    }
-
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 36px;
-    }
-
-    .card {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .meta-card span {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .meta-card strong {
-      display: block;
-      font-size: 18px;
-      letter-spacing: -.025em;
-      line-height: 1.25;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: .92fr 1.08fr;
-      gap: 42px;
-      align-items: start;
-    }
-
-    .visual-panel {
-      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      border-radius: 38px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-    }
-
-    .flow-stack {
-      display: grid;
-      gap: 14px;
-    }
-
-    .flow-pill {
-      border-radius: 20px;
-      padding: 18px 20px;
-      background: rgba(255,255,255,.065);
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .flow-pill b {
-      font-size: 18px;
-      letter-spacing: -.03em;
-    }
-
-    .flow-pill span {
-      color: var(--muted);
-      font-size: 14px;
-      text-align: right;
-    }
-
-    .arrow {
-      text-align: center;
-      color: var(--accent);
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .insight-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 40px;
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: rgba(217,255,111,.13);
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-
-    .insight-card h3,
-    .principle-card h3 {
-      margin: 0 0 12px;
-      font-size: 22px;
-    }
-
-    .insight-card p,
-    .principle-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .diagram {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-top: 40px;
-    }
-
-    .diagram-col {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 34px;
-      padding: 28px;
-    }
-
-    .diagram-col h3 {
-      margin: 0 0 10px;
-      font-size: 28px;
-    }
-
-    .diagram-col p {
-      color: var(--muted);
-      margin: 0 0 22px;
-    }
-
-    .mini-flow {
-      display: grid;
-      gap: 12px;
-    }
-
-    .mini-flow div {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
-    }
-
-    .good .mini-flow div {
-      border-color: rgba(217,255,111,.38);
-    }
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 40px;
-    }
-
-    .screen-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-top: 42px;
-    }
-
-    .phone {
-      background: #edeae2;
-      color: #151515;
-      border: 8px solid #151515;
-      border-radius: 38px;
-      padding: 16px;
-      min-height: 575px;
-      box-shadow: var(--shadow);
-    }
-
-    .phone-top {
-      width: 88px;
-      height: 6px;
-      background: #202020;
-      opacity: .85;
-      border-radius: 999px;
-      margin: 2px auto 24px;
-    }
-
-    .phone h4 {
-      margin: 0 0 8px;
-      font-size: 23px;
-      letter-spacing: -.045em;
-      line-height: 1.1;
-    }
-
-    .phone p {
-      margin: 0 0 22px;
-      color: #5f5b52;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #eef7c8;
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 18px;
-    }
-
-    .ui-card {
-      background: #fff;
-      border: 1px solid #ded9cc;
-      border-radius: 20px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-
-    .ui-card strong {
-      display: block;
-      margin-bottom: 4px;
-      letter-spacing: -.02em;
-    }
-
-    .ui-card small {
-      color: #6a665c;
-      line-height: 1.35;
-    }
-
-    .cta-card {
-      background: var(--accent);
-      color: #111;
-      border-color: var(--accent);
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .toggle {
-      width: 46px;
-      height: 26px;
-      border-radius: 999px;
-      background: #d9ff6f;
-      position: relative;
-      flex: 0 0 auto;
-    }
-
-    .toggle::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #111;
-      position: absolute;
-      top: 3px;
-      right: 3px;
-    }
-
-    .quote {
-      font-size: clamp(36px, 6vw, 78px);
-      line-height: 1.02;
-      letter-spacing: -.065em;
-      max-width: 980px;
-      margin: 34px 0 22px;
-    }
-
-    .footer {
-      padding: 46px 24px;
-      text-align: center;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-    }
-
-    @media (max-width: 960px) {
-      .hero,
-      .split,
-      .diagram {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 62px;
-        min-height: auto;
-      }
-
-      .hero-visual {
-        min-height: 480px;
-      }
-
-      .meta-grid,
-      .insight-grid,
-      .screen-grid,
-      .principles {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-
-      .section { padding: 68px 0; }
-
-      .meta-grid,
-      .insight-grid,
-      .screen-grid,
-      .principles {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-visual {
-        min-height: 420px;
-      }
-
-      .node {
-        width: 108px;
-        height: 108px;
-        font-size: 14px;
-      }
-
-      .node.center {
-        width: 138px;
-        height: 138px;
-      }
-
-      .node.profile { left: 8px; top: 38px; }
-      .node.connection { right: 8px; top: 150px; }
-      .node.sync { left: 52px; bottom: 34px; }
-    }
-  
-
-/* ── Integration: portfolio nav wins ── */
-nav {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 200 !important;
-  background: rgba(250,218,221,0.96) !important;
-  backdrop-filter: blur(14px) !important;
-  border-bottom: 1px solid #E8E2D9 !important;
-  padding: 0 6vw !important;
-  height: 64px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
+/* ── NRK PORTFOLIO — SHARED STYLES ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --pink:       #FADADD;
+  --pink-mid:   #F5C2C8;
+  --pink-deep:  #E8A0AA;
+  --crimson:    #8B1A1A;
+  --crimson-mid:#A02020;
+  --rose:       #C4607A;
+  --rose-light: #D4849A;
+  --rose-pale:  #F0D0D8;
+  --ink:        #1A0808;
+  --muted:      #9C6870;
+  --sand:       #E8D0D4;
+  --white:      #FFFFFF;
+  --cream:      #FFF7F8;
+  --card-bg:    #FFFAFA;
 }
 
-/* Case study body starts after 64px nav */
-.case-study { padding-top: 0; }
-header.hero { padding-top: 72px !important; }
-
-/* Prev/next nav */
-.cs-page-nav {
-  display: flex; justify-content: space-between; align-items: center;
-  max-width: 1180px; margin: 0 auto;
-  padding: 40px 24px 64px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  flex-wrap: wrap; gap: 16px;
-}
-.cpn-label {
-  font-size: 10px; color: rgba(255,255,255,0.4);
-  letter-spacing: .12em; text-transform: uppercase;
-  margin-bottom: 5px; font-family: 'DM Sans', sans-serif;
-}
-.cpn-title {
-  font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 500;
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
   font-family: 'DM Sans', sans-serif;
+  background: var(--pink);
+  color: var(--ink);
+  line-height: 1.6;
 }
-.cpn-link { text-decoration: none; }
-.cpn-link:hover .cpn-title { color: #d9ff6f; }
-</style>
-</head>
-<body>
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
 
-<!-- ══ PORTFOLIO NAV ══ -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <div class="logo-fallback">👩🏻</div>
-    <span>Nikhitha</span>
-  </a>
-  <div class="nav-links" id="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="work.html" class="active">Work</a>
-    <a href="resume.html">Resume</a>
-    <a href="contact.html">Contact Me</a>
-  </div>
-  <button class="nav-mobile-btn" onclick="toggleNav()">☰</button>
-</nav>
-
-<article class="case-study">
-<header class="hero">
-      <div>
-        <a href="work.html" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(217,255,111,0.75);text-decoration:none;margin-bottom:20px;font-family:Inter,sans-serif;">← Back to Work</a>
-        <div class="eyebrow"><span class="dot"></span> UX Research Case Study</div>
-        <h1>Making the Invisible Understandable</h1>
-        <p class="hero-copy">
-          Improving clarity in a connected automotive profile experience by evaluating how users understand profiles, account connection, and synchronization behaviors.
-        </p>
-        
-      </div>
-
-      <div class="hero-visual" aria-label="Abstract connected profile system visual">
-        <div class="grid-bg"></div>
-        <div class="system-map">
-          <div class="circle one"></div>
-          <div class="circle two"></div>
-          <div class="circle three"></div>
-          <div class="node profile">Profile</div>
-          <div class="node connection">Account<br />Connection</div>
-          <div class="node sync">Sync<br />Settings</div>
-          <div class="node center">System<br />Clarity</div>
-        </div>
-      </div>
-    </header>
-
-    <section class="section" id="overview">
-      <div class="container">
-        <div class="section-label">Overview</div>
-        <h2>A functional system still needed clearer communication.</h2>
-        <p class="lead">
-          An existing profile experience allowed users to manage preferences, connect an account, and synchronize selected settings. My role was to evaluate an early prototype, identify usability risks, and recommend improvements before product decisions were finalized.
-        </p>
-
-        <div class="meta-grid">
-          <div class="card meta-card">
-            <span>Role</span>
-            <strong>UX Researcher / User Testing Lead</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Methods</span>
-            <strong>Expert Evaluation, Think-Aloud, Heuristic Review</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Participants</span>
-            <strong>5 UX / HMI Experts</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Focus</span>
-            <strong>Profiles, Account Connection, Synchronization, Feedback</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container split">
-        <div>
-          <div class="section-label">The Challenge</div>
-          <h2>The UI was visible. The system logic was not.</h2>
-          <p class="lead">
-            Participants could complete many tasks, but opportunities emerged to make the system behavior easier to understand. The experience needed to better communicate what information belonged to a profile, what changed after account connection, and which settings were synchronized.
-          </p>
-        </div>
-
-        <div class="visual-panel">
-          <div class="flow-stack">
-            <div class="flow-pill">
-              <b>Hidden System Logic</b>
-              <span>Profile, connection, sync rules</span>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="flow-pill">
-              <b>Unclear Mental Models</b>
-              <span>Users infer what happens</span>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="flow-pill">
-              <b>Increased Cognitive Effort</b>
-              <span>More interpretation required</span>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="flow-pill">
-              <b>Opportunity for Clarity</b>
-              <span>Better labels, grouping, feedback</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="findings">
-      <div class="container">
-        <div class="section-label">Key Findings</div>
-        <h2>Participants completed tasks, but the experience could better explain itself.</h2>
-        <p class="lead">
-          I evaluated task-based scenarios including switching profiles, connecting accounts, managing synchronization, setting privacy controls, interpreting feedback, and navigating profile-related workflows.
-        </p>
-
-        <div class="insight-grid">
-          <div class="card insight-card">
-            <div class="icon">◐</div>
-            <h3>Profile ownership needed distinction</h3>
-            <p>Participants needed clearer cues to understand which settings were personal, shared, or eligible for synchronization.</p>
-          </div>
-
-          <div class="card insight-card">
-            <div class="icon">↗</div>
-            <h3>Connection needed more context</h3>
-            <p>The action was understandable, but the benefit and outcome of connecting an account could be communicated more clearly.</p>
-          </div>
-
-          <div class="card insight-card">
-            <div class="icon">☁</div>
-            <h3>Sync expectations varied</h3>
-            <p>Some participants assumed all settings would synchronize, revealing a need to clarify scope and behavior.</p>
-          </div>
-
-          <div class="card insight-card">
-            <div class="icon">●</div>
-            <h3>System status could be more visible</h3>
-            <p>Persistent indicators could help users understand connection state, synchronization state, and completion of recent actions.</p>
-          </div>
-
-          <div class="card insight-card">
-            <div class="icon">⌁</div>
-            <h3>Navigation introduced extra effort</h3>
-            <p>Redundant actions, additional steps, and unexpected back behavior created opportunities for flow simplification.</p>
-          </div>
-
-          <div class="card insight-card">
-            <div class="icon">✦</div>
-            <h3>Clarity improved product quality</h3>
-            <p>Expert feedback helped identify refinements that could make the final experience more intuitive for end customers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="direction">
-      <div class="container">
-        <div class="section-label">Design Direction</div>
-        <h2>The goal was not to add more features. It was to communicate existing behavior clearly.</h2>
-        <p class="lead">
-          The evaluation reframed the opportunity from interface fixes to mental model alignment. Profiles, account connection, and synchronization needed to be separated, explained, and supported with clearer system feedback.
-        </p>
-
-        <div class="diagram">
-          <div class="diagram-col">
-            <h3>Before: Ambiguous System Behavior</h3>
-            <p>Profile, connect, and sync felt closely tied together, requiring users to infer outcomes.</p>
-            <div class="mini-flow">
-              <div>Profile Settings</div>
-              <div>Connect</div>
-              <div>Sync</div>
-              <div>Current State</div>
-            </div>
-          </div>
-
-          <div class="diagram-col good">
-            <h3>After: Clearer Mental Model</h3>
-            <p>Connection and synchronization are treated as separate concepts with clearer choices and feedback.</p>
-            <div class="mini-flow">
-              <div>Personal Profile</div>
-              <div>Connect Account</div>
-              <div>Choose What Syncs</div>
-              <div>Persistent System Status</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="principles">
-          <div class="card principle-card">
-            <h3>Make system behavior visible</h3>
-            <p>Clarify what is personal, shared, and synchronized.</p>
-          </div>
-          <div class="card principle-card">
-            <h3>Separate connection and sync</h3>
-            <p>Treat account linking and data movement as distinct decisions.</p>
-          </div>
-          <div class="card principle-card">
-            <h3>Show system status</h3>
-            <p>Communicate the current state of connection, sync, and recent actions.</p>
-          </div>
-          <div class="card principle-card">
-            <h3>Clarify value</h3>
-            <p>Explain what users gain after taking each action.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="visuals">
-      <div class="container">
-        <div class="section-label">Concept Visuals</div>
-        <h2>Concept screens — anonymized for portfolio use.</h2>
-        <p class="lead">
-          These screens use generic labels and neutral styling to illustrate design direction. All proprietary details, branding, and platform specifics have been removed in line with NDA requirements.
-        </p>
-
-        <div class="screen-grid">
-          <div class="phone">
-            <div class="phone-top"></div>
-            <span class="status">● Connected</span>
-            <h4>Profile Overview</h4>
-            <p>Surface ownership and current state before users make changes.</p>
-            <div class="ui-card">
-              <strong>Personal Preferences</strong>
-              <small>Saved to this profile</small>
-            </div>
-            <div class="ui-card">
-              <strong>Shared Settings</strong>
-              <small>Available across users or contexts</small>
-            </div>
-            <div class="ui-card">
-              <strong>Sync Settings</strong>
-              <small>3 selected items eligible for sync</small>
-            </div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-top"></div>
-            <h4>Connect Account</h4>
-            <p>Explain the value of connecting before asking users to continue.</p>
-            <div class="ui-card">
-              <strong>What happens when you connect?</strong>
-              <small>Access selected preferences across supported experiences.</small>
-            </div>
-            <div class="ui-card">
-              <strong>What stays separate?</strong>
-              <small>Synchronization is managed in the next step.</small>
-            </div>
-            <div class="ui-card cta-card">Continue</div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-top"></div>
-            <span class="status">● Sync available</span>
-            <h4>Choose What Syncs</h4>
-            <p>Turn synchronization into an explicit and understandable choice.</p>
-            <div class="ui-card toggle-row">
-              <span>
-                <strong>Display Preferences</strong>
-                <small>Sync across supported experiences</small>
-              </span>
-              <span class="toggle"></span>
-            </div>
-            <div class="ui-card toggle-row">
-              <span>
-                <strong>Audio Settings</strong>
-                <small>Sync across supported experiences</small>
-              </span>
-              <span class="toggle"></span>
-            </div>
-            <div class="ui-card toggle-row">
-              <span>
-                <strong>Privacy PIN</strong>
-                <small>Keep local only</small>
-              </span>
-              <strong>Local</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-label">Impact</div>
-        <h2>Expert feedback helped refine the experience before broader product decisions.</h2>
-        <p class="lead">
-          The evaluation identified opportunities to improve information architecture, system feedback, navigation efficiency, and communication of profile-related behaviors.
-        </p>
-
-        <div class="meta-grid">
-          <div class="card meta-card">
-            <span>Identified</span>
-            <strong>Gaps in system understanding</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Reframed</span>
-            <strong>Usability issues into mental model opportunities</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Recommended</span>
-            <strong>Clearer grouping, labels, and persistent feedback</strong>
-          </div>
-          <div class="card meta-card">
-            <span>Supported</span>
-            <strong>A more intuitive end-customer experience</strong>
-          </div>
-        </div>
-
-        <div class="quote">Complex systems become easier to use when their behavior is clearly communicated.</div>
-        <p class="lead">
-          This project reinforced that a successful experience is not defined only by whether users can complete a task. It also depends on whether users understand what the system does, why it matters, and what happens next.
-        </p>
-      </div>
-    </section>
-</article>
-
-<!-- ══ PREV / NEXT NAV ══ -->
-<div class="cs-page-nav">
-  <a href="cs-automotive.html" class="cpn-link">
-    <div class="cpn-label">Previous</div>
-    <div class="cpn-title">← ARCA Driver Profile System</div>
-  </a>
-  <a href="cs-home-services.html" class="cpn-link">
-    <div class="cpn-label">Next Case Study</div>
-    <div class="cpn-title">Home Services Platform →</div>
-  </a>
-</div>
-
-<!-- ══ PORTFOLIO FOOTER ══ -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-name">Nikhitha Reddy Kalakota</div>
-      <div class="footer-sub">UXE USER TESTING LEAD · STELLANTIS · NIKHITHAREDDY.COM</div>
-    </div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="work.html">Work</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://www.linkedin.com/in/nikhitha-reddy-0a5a8b15b/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-function toggleNav(){
-  document.getElementById('nav-links').classList.toggle('open');
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(250, 218, 221, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--pink-mid);
+  padding: 0 6vw; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-</script>
-</body>
-</html>
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px;
+  font-weight: 600; color: var(--crimson); letter-spacing: 0.02em;
+}
+.nav-logo img {
+  width: 42px; height: 42px; border-radius: 50%;
+  object-fit: cover; border: 2px solid var(--rose-pale);
+}
+.nav-logo .logo-fallback {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--rose-pale); display: flex; align-items: center;
+  justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--crimson);
+  letter-spacing: 0.02em; position: relative; padding-bottom: 3px;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--crimson); transform: scaleX(0);
+  transition: transform 0.2s; transform-origin: left;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { font-weight: 600; }
+.nav-mobile-btn {
+  display: none; background: none; border: none;
+  cursor: pointer; color: var(--crimson); font-size: 22px;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--crimson); color: var(--white);
+  border: none; border-radius: 6px;
+  padding: 14px 28px; font-size: 14px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--crimson-mid); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--crimson);
+  border: 1.5px solid var(--crimson); border-radius: 6px;
+  padding: 13px 28px; font-size: 14px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--crimson); color: var(--white); }
+
+/* ── SECTION SHARED ── */
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+  color: var(--crimson); letter-spacing: -1px;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.section-body {
+  font-size: 16px; color: var(--muted); line-height: 1.8;
+}
+
+/* ── PROJECT CARDS ── */
+.project-card {
+  background: var(--card-bg); border: 1px solid var(--sand);
+  border-radius: 16px; overflow: hidden;
+  cursor: pointer; transition: transform 0.22s, box-shadow 0.22s;
+  display: block; text-decoration: none;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(139, 26, 26, 0.1);
+}
+.card-cover {
+  width: 100%; height: 200px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+}
+.card-body { padding: 22px 24px 26px; }
+.card-eyebrow {
+  font-size: 10px; color: var(--rose); font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700; color: var(--crimson);
+  line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.3px;
+}
+.card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.card-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.chip {
+  background: var(--rose-pale); border-radius: 4px;
+  padding: 4px 10px; font-size: 11px; color: var(--crimson);
+  font-weight: 500;
+}
+.card-link {
+  font-size: 13px; font-weight: 600; color: var(--crimson);
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* ── CASE STUDY PAGE ── */
+.cs-hero {
+  padding: 80px 6vw 60px;
+}
+.cs-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--rose);
+  margin-bottom: 28px;
+}
+.cs-tag-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px; flex-wrap: wrap;
+}
+.cs-pill {
+  background: var(--rose-pale); color: var(--crimson);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.cs-yr { font-size: 12px; color: var(--muted); font-weight: 500; }
+.cs-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5.5vw, 64px); font-weight: 900;
+  color: var(--crimson); letter-spacing: -2px;
+  line-height: 1.05; margin-bottom: 18px;
+}
+.cs-tagline { font-size: 18px; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 36px; }
+.cs-meta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+.cs-meta-card {
+  background: var(--white); border-radius: 10px;
+  padding: 14px 16px; border: 1px solid var(--sand);
+}
+.cs-meta-label {
+  font-size: 10px; color: var(--muted); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 5px;
+}
+.cs-meta-val { font-size: 13px; color: var(--crimson); font-weight: 600; line-height: 1.4; }
+
+.cs-body { max-width: 860px; margin: 0 auto; padding: 0 6vw 80px; }
+.cs-section { padding: 48px 0; border-bottom: 1px solid var(--sand); }
+.cs-section:last-of-type { border-bottom: none; }
+
+/* ── STAT CARDS ── */
+.stat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-top: 24px;
+}
+.stat-card {
+  background: var(--white); border: 1px solid var(--sand);
+  border-radius: 12px; padding: 22px 18px; text-align: center;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px; font-weight: 700; color: var(--crimson);
+  line-height: 1; margin-bottom: 8px;
+}
+.stat-lbl { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── PROCESS TIMELINE ── */
+.timeline { margin-top: 28px; }
+.t-step {
+  display: grid; grid-template-columns: 110px 1fr;
+  gap: 18px; padding-bottom: 28px;
+}
+.t-left {
+  display: flex; flex-direction: column;
+  align-items: flex-end; padding-right: 18px;
+}
+.t-badge {
+  background: var(--rose-pale); color: var(--crimson);
+  border-radius: 4px; padding: 5px 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; white-space: nowrap; display: inline-block;
+}
+.t-line {
+  width: 1px; background: var(--sand);
+  flex: 1; margin-top: 8px; min-height: 16px;
+}
+.t-step-title { font-size: 15px; font-weight: 600; color: var(--crimson); margin-bottom: 5px; }
+.t-step-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── OUTCOME BOX ── */
+.outcome-box {
+  background: var(--white); border-left: 4px solid var(--crimson);
+  padding: 28px 32px; margin-top: 24px;
+}
+.outcome-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-style: italic; color: var(--crimson);
+  line-height: 1.65; margin-bottom: 12px;
+}
+.outcome-attr { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.grade-pill {
+  display: inline-block; background: var(--crimson); color: var(--white);
+  border-radius: 20px; padding: 5px 16px; font-size: 12px; font-weight: 600;
+}
+
+/* ── CTA ROW ── */
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 36px; }
+
+/* ── CASE NAV ── */
+.case-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 36px 6vw 56px; border-top: 1px solid var(--sand);
+  max-width: 860px; margin: 0 auto;
+}
+.cn-label {
+  font-size: 10px; color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 5px;
+}
+.cn-title { font-size: 15px; color: var(--crimson); font-weight: 500; }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  overflow: hidden; background: var(--rose-pale);
+  border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand);
+  padding: 14px 0;
+}
+.ticker-track {
+  display: flex; gap: 2.5rem;
+  width: max-content; animation: ticker-scroll 30s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.t-item { font-size: 12px; color: var(--crimson); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; opacity: 0.75; }
+.t-dot { color: var(--rose); opacity: 1; }
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--crimson); padding: 48px 6vw;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 24px;
+}
+.footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--white); margin-bottom: 5px;
+}
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ── ABOUT ── */
+.about-hero {
+  padding: 80px 6vw 0;
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr;
+  gap: 5rem; align-items: start;
+}
+.about-photo-wrap { position: relative; }
+.about-photo {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  border-radius: 16px; display: block;
+}
+.about-photo-fallback {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--rose-pale); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 80px; color: var(--crimson); opacity: 0.3;
+}
+
+/* ── CONTACT FORM ── */
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 7px;
+}
+.form-input {
+  width: 100%; background: var(--white);
+  border: 1.5px solid var(--sand); border-radius: 8px;
+  padding: 13px 16px; font-size: 15px; color: var(--ink);
+  font-family: 'DM Sans', sans-serif; outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--crimson); }
+.form-textarea { min-height: 130px; resize: vertical; }
+.reason-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.reason-btn {
+  background: var(--rose-pale); color: var(--crimson);
+  border: 1px solid var(--sand); border-radius: 20px;
+  padding: 7px 14px; font-size: 12px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.reason-btn:hover, .reason-btn.active {
+  background: var(--crimson); color: var(--white); border-color: var(--crimson);
+}
+
+/* ── SKILL PILLS ── */
+.skills-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+.skill-tag {
+  background: var(--rose-pale); border-radius: 6px;
+  padding: 7px 14px; font-size: 13px; color: var(--crimson); font-weight: 500;
+}
+
+/* ── EDU CARDS ── */
+.edu-card {
+  background: var(--card-bg); border: 1px solid var(--sand);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 10px;
+}
+.edu-card-title { font-size: 14px; font-weight: 600; color: var(--crimson); margin-bottom: 4px; }
+.edu-row { display: flex; justify-content: space-between; align-items: center; }
+.edu-prof { font-size: 12px; color: var(--muted); }
+.edu-grade {
+  font-size: 11px; background: var(--rose-pale); color: var(--crimson);
+  border-radius: 10px; padding: 2px 10px; font-weight: 600;
+}
+
+/* ── RESUME ── */
+.resume-block { margin-bottom: 44px; }
+.resume-divider-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+.resume-block-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; color: var(--crimson); white-space: nowrap;
+}
+.resume-line { flex: 1; height: 1px; background: var(--sand); }
+.resume-card {
+  background: var(--card-bg); border: 1px solid var(--sand);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 10px;
+}
+.resume-card-title { font-size: 15px; font-weight: 600; color: var(--crimson); margin-bottom: 4px; }
+.resume-card-sub { font-size: 12px; color: var(--rose); font-weight: 500; margin-bottom: 6px; }
+.resume-card-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .about-hero { grid-template-columns: 1fr; gap: 2rem; }
+  .about-photo-fallback { aspect-ratio: 1; max-width: 280px; }
+}
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .nav-mobile-btn { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: var(--pink); padding: 20px 6vw 24px;
+    border-bottom: 1px solid var(--sand); z-index: 199; gap: 18px;
+  }
+  .cs-meta-grid { grid-template-columns: 1fr 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .t-step { grid-template-columns: 1fr; }
+  .t-left { align-items: flex-start; padding-right: 0; margin-bottom: 8px; }
+  .case-nav { flex-direction: column; gap: 16px; }
+}
